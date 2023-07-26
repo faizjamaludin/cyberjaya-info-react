@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { PrimaryButton } from "./Button";
+
+import { useNavigate } from "react-router-dom";
 
 function Topnav() {
   const [toggle, setToggle] = useState(false);
+
+  const navigate = useNavigate();
 
   const menuItem = [
     {
@@ -27,6 +32,12 @@ function Topnav() {
       path: "/",
     },
   ];
+
+
+  const loginHandler = () => {
+    navigate("/login")
+  }
+
   return (
     <div className="w-full flex justify-center">
       <div className="shadow w-full h-20 flex justify-center">
@@ -41,15 +52,14 @@ function Topnav() {
             </a>
           </div>
           <div
-            className={`${
-              toggle ? "top-[9%]" : "top-[-100%]"
-            } md:static absolute bg-white md:min-h-fit min-h-[30vh] left-0 md:w-auto w-full flex items-center px-5`}
+            className={`${toggle ? "top-[9%]" : "top-[-100%]"
+              } md:static absolute bg-white md:min-h-fit min-h-[30vh] left-0 md:w-auto w-full flex items-center px-5`}
           >
             <ul className="flex md:flex-row flex-col md:items-center md:gap-10 gap-8">
               {menuItem.map((item) => (
                 <li key={item.id}>
                   <a
-                    className="hover:bg-secondary-100 px-4 py-2 rounded-md transition-all text-md font-semibold text-primary"
+                    className="hover:bg-secondary-100 px-4 py-2 rounded-md transition-all text-md font-medium text-primary"
                     href={item.path}
                   >
                     {item.label}
@@ -59,7 +69,7 @@ function Topnav() {
             </ul>
           </div>
           <div className="flex items-center gap-6">
-            <button className="px-5 py-2 rounded-lg border-2">Sign In</button>
+            <PrimaryButton onClick={loginHandler} label="Sign In" />
             <div className="md:hidden">
               {toggle ? (
                 <CloseIcon

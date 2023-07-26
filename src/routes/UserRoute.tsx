@@ -5,14 +5,8 @@ import Home from "../pages/nonDashboard/Home";
 
 function UserRoute() {
   return (
-    <div className="w-full">
-      <div className="w-full">
-        <Topnav />
-      </div>
-      <Routes>
-        {/* non-dashboard view */}
-        <Route path="/" element={<Home />} />
-      </Routes>
+    <div>
+
     </div>
   );
 }
