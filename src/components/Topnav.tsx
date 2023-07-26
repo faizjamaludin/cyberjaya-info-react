@@ -33,10 +33,9 @@ function Topnav() {
     },
   ];
 
-
   const loginHandler = () => {
-    navigate("/login")
-  }
+    navigate("/login");
+  };
 
   return (
     <div className="w-full flex justify-center">
@@ -52,8 +51,9 @@ function Topnav() {
             </a>
           </div>
           <div
-            className={`${toggle ? "top-[9%]" : "top-[-100%]"
-              } md:static absolute bg-white md:min-h-fit min-h-[30vh] left-0 md:w-auto w-full flex items-center px-5`}
+            className={`${
+              toggle ? "top-[9%]" : "top-[-100%]"
+            } md:static absolute bg-white md:min-h-fit min-h-[30vh] left-0 md:w-auto w-full flex items-center px-5`}
           >
             <ul className="flex md:flex-row flex-col md:items-center md:gap-10 gap-8">
               {menuItem.map((item) => (
