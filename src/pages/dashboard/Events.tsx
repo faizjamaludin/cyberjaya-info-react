@@ -1,25 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import Sidenav from '../../components/Sidenav'
-import Topnav from '../../components/Topnav'
-import Footer from '../../components/Footer'
+import Sidenav from "../../components/Sidenav";
+import Topnav from "../../components/Topnav";
+import Footer from "../../components/Footer";
 
 function Events() {
-    const [open, setOpen] = useState(false);
-    return (
-        <div className="w-full flex flex-row">
-            <div className='fixed'>
-                <Sidenav open={open} setOpen={setOpen} />
-            </div>
-            <div className={`w-full duration-300 ${open ? 'ml-60' : 'ml-20'}`}>
-                <section className='min-h-screen py-5 px-10 text-primary'>
-                    <h1 className='font-medium text-2xl mt-10'>Events</h1>
-
-                </section>
-                <Footer />
-            </div>
-        </div>
-    )
+  const [open, setOpen] = useState(true);
+  return (
+    <div className="w-full flex flex-row">
+      <div className="fixed">
+        <Sidenav open={open} setOpen={setOpen} />
+      </div>
+      <div className={`w-full duration-300 ${open ? "ml-60" : "ml-20"}`}>
+        <section className="min-h-screen py-5 px-10 text-primary">
+          <h1 className="font-medium text-2xl mt-10">Events</h1>
+        </section>
+        <Footer />
+      </div>
+    </div>
+  );
 }
 
-export default Events
+export default Events;

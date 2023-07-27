@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 function Topnav() {
   const [toggle, setToggle] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+  const [btn, setBtn] = useState(false);
 
   const navigate = useNavigate();
 
@@ -33,7 +35,7 @@ function Topnav() {
     },
   ];
 
-  const loginHandler = () => {
+  const btnHandler = (btn: string) => {
     navigate("/login");
   };
 
@@ -42,13 +44,11 @@ function Topnav() {
       <div className="shadow w-full h-20 flex justify-center">
         <nav className="container flex justify-between items-center p-10">
           <div className="">
-            <a href="">
-              <img
-                className="w-14 rounded-full"
-                src="./assets/img/logo.jpeg"
-                alt=""
-              />
-            </a>
+            <img
+              className="w-14 rounded-full"
+              src="./assets/img/logo.jpeg"
+              alt=""
+            />
           </div>
           <div
             className={`${
@@ -69,26 +69,24 @@ function Topnav() {
             </ul>
           </div>
           <div className="flex items-center gap-6">
-            <PrimaryButton onClick={loginHandler} label="Sign In" />
-            <div className="md:hidden">
-              {toggle ? (
-                <CloseIcon
-                  fontSize="large"
-                  className="cursor-pointer transition-all"
-                  onClick={() => {
-                    setToggle(false);
-                  }}
-                />
-              ) : (
-                <MenuIcon
-                  fontSize="large"
-                  className="cursor-pointer transition-all"
-                  onClick={() => {
-                    setToggle(true);
-                  }}
-                />
-              )}
-            </div>
+            {btn ? (
+              <PrimaryButton
+                type="button"
+                onClick={() => {
+                  setBtn(!btn);
+                }}
+                label="Sign In"
+              />
+            ) : (
+              <img
+                className="w-14 cursor-pointer rounded-full"
+                src="./assets/img/user.png"
+                alt=""
+                onClick={() => {
+                  setBtn(!btn);
+                }}
+              />
+            )}
           </div>
         </nav>
       </div>

@@ -1,43 +1,47 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import Sidenav from '../../components/Sidenav'
-import Topnav from '../../components/Topnav'
-import Footer from '../../components/Footer'
+import Sidenav from "../../components/Sidenav";
+import Topnav from "../../components/Topnav";
+import Footer from "../../components/Footer";
 
 function Dashboard() {
+  const [open, setOpen] = useState(true);
 
-    const [open, setOpen] = useState(false);
-
-
-    return (
-        <div className="w-full flex flex-row">
-            <div className='fixed'>
-                <Sidenav open={open} setOpen={setOpen} />
+  return (
+    <div className="w-full flex flex-row">
+      <div className="fixed">
+        <Sidenav open={open} setOpen={setOpen} />
+      </div>
+      <div className={`w-full duration-300 ${open ? "ml-60" : "ml-20"}`}>
+        <section className="min-h-screen py-5 px-10 text-primary">
+          <h1 className="font-medium text-2xl mt-10">Dashboard</h1>
+          <div className="flex flex-row gap-20 justify-center items-center mt-20 text-primary">
+            <div className="flex flex-col w-72 h-36 border-2 border-primary rounded-lg shadow-lg p-5">
+              <p className="font-medium text-md">Registered User</p>
+              <p className="text-5xl font-semibold text-center h-full place-items-center place-content-center flex text-primary">
+                27
+              </p>
             </div>
-            <div className={`w-full duration-300 ${open ? 'ml-60' : 'ml-20'}`}>
-                <section className='min-h-screen py-5 px-10 text-primary'>
-                    <h1 className='font-medium text-2xl mt-10'>Dashboard</h1>
-                    <div className='flex flex-row gap-20 justify-center items-center mt-20 text-primary'>
-                        <div className='flex flex-col w-72 h-36 border-2 border-primary rounded-lg shadow-lg p-5'>
-                            <p className='font-medium text-md'>Registered User</p>
-                            <p className='text-5xl font-semibold text-center h-full place-items-center place-content-center flex text-primary'>27</p>
-                        </div>
 
-                        <div className='flex flex-col w-72 h-36 border-2 border-primary rounded-lg shadow-lg p-5'>
-                            <p className='font-medium text-md'>Listing</p>
-                            <p className='text-5xl font-semibold text-center h-full place-items-center place-content-center flex text-primary'>27</p>
-                        </div>
-
-                        <div className='flex flex-col w-72 h-36 border-2 border-primary rounded-lg shadow-lg p-5'>
-                            <p className='font-medium text-md'>Registered User</p>
-                            <p className='text-5xl font-semibold text-center h-full place-items-center place-content-center flex text-primary'>27</p>
-                        </div>
-                    </div>
-                </section>
-                <Footer />
+            <div className="flex flex-col w-72 h-36 border-2 border-primary rounded-lg shadow-lg p-5">
+              <p className="font-medium text-md">Listing</p>
+              <p className="text-5xl font-semibold text-center h-full place-items-center place-content-center flex text-primary">
+                27
+              </p>
             </div>
-        </div>
-    )
+
+            <div className="flex flex-col w-72 h-36 border-2 border-primary rounded-lg shadow-lg p-5">
+              <p className="font-medium text-md">Registered User</p>
+              <p className="text-5xl font-semibold text-center h-full place-items-center place-content-center flex text-primary">
+                27
+              </p>
+            </div>
+          </div>
+        </section>
+        <Footer />
+      </div>
+    </div>
+  );
 }
 
-export default Dashboard
+export default Dashboard;
