@@ -40,7 +40,7 @@ const Sidenav = ({ open, setOpen }: OpenProps) => {
 
     return (
         <nav className={`${open ? 'w-60' : 'w-20'} min-h-screen bg-white shadow-md relative p-5 pt-8 duration-300`}>
-            <NavigateBeforeIcon className={`${!open && 'rotate-180'} absolute text-white bg-primary -right-2 top-5 p-px rounded-full cursor-pointer shadow`} onClick={() => setOpen(!open)} fontSize='small' />
+            <NavigateBeforeIcon className={`${!open && 'rotate-180'} absolute text-white bg-primary -right-2 top-5 p-px rounded-full cursor-pointer shadow duration-500`} onClick={() => setOpen(!open)} fontSize='small' />
 
             <div className='flex gap-4 items-center'>
                 <img onClick={handleNavigate} className={`cursor-pointer duration-500 w-16 rounded-lg ${open && 'rotate-[360deg]'}`} src="/assets/img/logo.jpeg" alt="" />
