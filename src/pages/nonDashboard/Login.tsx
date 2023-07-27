@@ -5,11 +5,22 @@ import { useFormik } from "formik";
 import { PrimaryButton } from "../../components/Button";
 
 function Login() {
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+
   return (
     <div className="w-full">
       <Topnav />
       <section className="flex justify-center items-center w-full my-16">
-        <form className="w-96  border-2 border-primary rounded-md shadow-md p-4">
+        <form onSubmit={formik.handleSubmit} className="w-96  border-2 border-primary rounded-md shadow-md p-4">
           <h1 className="text-primary text-center mt-5 font-semibold text-3xl text-primary">
             Login
           </h1>
@@ -21,6 +32,9 @@ function Login() {
               className="w-full outline-0 border-2 border-primary py-2 px-2 rounded-md text-sm"
               type="text"
               placeholder="johndoe@gmail.com"
+              name="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
             />
           </div>
           <div>
@@ -30,7 +44,9 @@ function Login() {
             <input
               className="w-full outline-0 border-2 border-primary py-2 px-2 rounded-md text-sm"
               type="password"
-              placeholder="johndoe@gmail.com"
+              name="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
             />
           </div>
           <div className="w-full">

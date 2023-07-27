@@ -8,6 +8,9 @@ function Register() {
   const formik = useFormik({
     initialValues: {
       fullName: "",
+      email: "",
+      password: "",
+      cpassword: "",
     },
     onSubmit: (values) => {
       console.log(values);
@@ -18,7 +21,7 @@ function Register() {
     <div className="w-full">
       <Topnav />
       <section className="flex justify-center items-center w-full  my-16">
-        <form className="w-96  border-2 border-primary rounded-md shadow-md p-4">
+        <form onSubmit={formik.handleSubmit} className="w-96  border-2 border-primary rounded-md shadow-md p-4">
           <h1 className="text-primary text-center mt-5 font-semibold text-3xl text-primary">
             Register
           </h1>
@@ -31,6 +34,8 @@ function Register() {
               type="text"
               placeholder="John Doe"
               name="fullName"
+              value={formik.values.fullName}
+              onChange={formik.handleChange}
             />
           </div>
           <div className="mb-3">
@@ -42,6 +47,8 @@ function Register() {
               type="text"
               placeholder="johndoe@gmail.com"
               name="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
             />
           </div>
           <div className="mb-3">
@@ -53,6 +60,8 @@ function Register() {
               type="password"
               placeholder="johndoe@gmail.com"
               name="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
             />
           </div>
           <div className="mb-3">
@@ -64,6 +73,8 @@ function Register() {
               type="password"
               name="cpassword"
               placeholder="johndoe@gmail.com"
+              value={formik.values.cpassword}
+              onChange={formik.handleChange}
             />
           </div>
           <div className="w-full">
