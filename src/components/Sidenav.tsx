@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { openclose } from "../redux/resize/resizeSlice";
+import { RootState } from "../redux/store";
 
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
@@ -11,11 +14,6 @@ import BugReportIcon from "@mui/icons-material/BugReport";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 import { PrimaryButton } from "./Button";
-
-interface OpenProps {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
 const menu = [
   {
@@ -50,8 +48,11 @@ const menu = [
   },
 ];
 
-const Sidenav = ({ open, setOpen }: OpenProps) => {
+const Sidenav = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const selectIsOpen = (state: RootState) => state.resize.isOpen;
+  const isOpen = useSelector(selectIsOpen);
 
   const handleNavigate = () => {
     navigate("/");
@@ -60,14 +61,14 @@ const Sidenav = ({ open, setOpen }: OpenProps) => {
   return (
     <nav
       className={`${
-        open ? "w-60" : "w-20"
+        isOpen ? "w-60" : "w-20"
       } min-h-screen bg-white shadow-md relative p-5 pt-8 duration-300`}
     >
       <NavigateBeforeIcon
         className={`${
-          !open && "rotate-180"
+          !isOpen && "rotate-180"
         } absolute text-white bg-primary -right-2 top-5 p-px rounded-full cursor-pointer shadow`}
-        onClick={() => setOpen(!open)}
+        onClick={() => dispatch(openclose())}
         fontSize="small"
       />
 
@@ -75,14 +76,14 @@ const Sidenav = ({ open, setOpen }: OpenProps) => {
         <img
           onClick={handleNavigate}
           className={`cursor-pointer duration-500 w-16 rounded-lg ${
-            open && "rotate-[360deg]"
+            isOpen && "rotate-[360deg]"
           }`}
           src="/assets/img/logo.jpeg"
           alt=""
         />
         <h1
           className={`${
-            !open && "scale-0"
+            !isOpen && "scale-0"
           } text-primary origin-left font-medium text-md duration-300`}
         >
           Cyberjaya Info
@@ -97,7 +98,9 @@ const Sidenav = ({ open, setOpen }: OpenProps) => {
           >
             {item.icon}
             <li className="">
-              <span className={`${!open && "hidden"} origin-left duration-200`}>
+              <span
+                className={`${!isOpen && "hidden"} origin-left duration-200`}
+              >
                 {item.title}
               </span>
             </li>
@@ -106,9 +109,9 @@ const Sidenav = ({ open, setOpen }: OpenProps) => {
         <div className="w-full flex justify-center items-center p-2">
           <PrimaryButton
             style={`text-xs absolute bottom-5  flex gap-2 justify-center items-center ${
-              open ? "w-4/5" : "w-3/5"
+              isOpen ? "w-4/5" : "w-3/5"
             }`}
-            label={`${open ? "Logout" : ""}`}
+            label={`${isOpen ? "Logout" : ""}`}
             icon={<ExitToAppIcon fontSize="small" />}
           />
         </div>
