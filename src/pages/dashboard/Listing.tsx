@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { openclose } from "../../redux/resize/resizeSlice";
 import { RootState } from "../../redux/store";
 
+import { PrimaryButton } from "../../components/Button";
 import Sidenav from "../../components/Sidenav";
 import Topnav from "../../components/Topnav";
 import Footer from "../../components/Footer";
@@ -152,7 +152,7 @@ function Listing() {
 
             <div className="w-3/5 border-2 border-primary shadow-lg rounded-md text-primary p-10 mt-12">
               <h1 className="font-semibold text-xl mb-5">Details Overview</h1>
-              <div className="flex flex-cols ">
+              <div className="flex flex-col ">
                 <div className="w-full">
                   <label
                     className="block text-sm font-semibold mb-2"
@@ -169,7 +169,7 @@ function Listing() {
                   ></textarea>
                 </div>
               </div>
-              <div className="flex flex-cols flex-wrap">
+              <div className="flex flex-col flex-wrap">
                 <div className="flex flex-row w-full gap-4">
                   <div className="w-full">
                     <label
@@ -182,7 +182,7 @@ function Listing() {
                       className="border-2 border-primary w-full text-sm rounded-md p-2"
                       type="text"
                       name="phone"
-                      placeholder=""
+                      placeholder="0134567890"
                     />
                   </div>
 
@@ -191,13 +191,13 @@ function Listing() {
                       className="block text-sm font-semibold mb-2"
                       htmlFor=""
                     >
-                      website
+                      Website
                     </label>
                     <input
                       className="border-2 border-primary w-full text-sm rounded-md p-2"
                       type="text"
                       name="website"
-                      placeholder=""
+                      placeholder="www.your-website.com"
                     />
                   </div>
 
@@ -212,7 +212,7 @@ function Listing() {
                       className="border-2 border-primary w-full text-sm rounded-md p-2"
                       type="text"
                       name="email"
-                      placeholder=""
+                      placeholder="your-email@gmail.com"
                     />
                   </div>
                 </div>
@@ -229,7 +229,7 @@ function Listing() {
                       className="border-2 border-primary w-full text-sm rounded-md p-2"
                       type="text"
                       name="facebook"
-                      placeholder=""
+                      placeholder="www.facebook.com/your-facebook"
                     />
                   </div>
 
@@ -244,7 +244,7 @@ function Listing() {
                       className="border-2 border-primary w-full text-sm rounded-md p-2"
                       type="text"
                       name="instagram"
-                      placeholder=""
+                      placeholder="www.instagram.com/your-instagram"
                     />
                   </div>
 
@@ -259,7 +259,7 @@ function Listing() {
                       className="border-2 border-primary w-full text-sm rounded-md p-2"
                       type="text"
                       name="twitter"
-                      placeholder=""
+                      placeholder="www.twitter.com/your-twitter"
                     />
                   </div>
                 </div>
@@ -268,8 +268,77 @@ function Listing() {
 
             <div className="w-3/5 border-2 border-primary shadow-lg rounded-md text-primary p-10 mt-12">
               <h1 className="font-semibold text-xl mb-5">Opening Hours</h1>
-              <div className="flex flex-cols "></div>
+              <div className="flex flex-col "></div>
             </div>
+
+
+            {/* Pricing section */}
+            <div className="w-3/5 border-2 border-primary shadow-lg rounded-md text-primary p-10 mt-12">
+              <h1 className="font-semibold text-xl mb-5">Pricing</h1>
+              <div className="flex flex-col ">
+                <div className="w-full">
+                  <label
+                    className="block text-sm font-semibold mb-2"
+                    htmlFor=""
+                  >
+                    Category Item
+                  </label>
+                  <input
+                    className="border-2 border-primary w-full text-sm rounded-md p-2"
+                    type="text"
+                    name="itemCategory"
+                    placeholder="Burger"
+                  />
+                </div>
+                <div className="flex flex-row w-full gap-4 mt-2">
+                  <div className="w-full">
+                    <label
+                      className="block text-sm font-semibold mb-2"
+                      htmlFor=""
+                    >
+                      Item Name
+                    </label>
+                    <input
+                      className="border-2 border-primary w-full text-sm rounded-md p-2"
+                      type="text"
+                      name="itemName"
+                      placeholder="Beef Burger"
+                    />
+                  </div>
+
+                  <div className="w-full">
+                    <label
+                      className="block text-sm font-semibold mb-2"
+                      htmlFor=""
+                    >
+                      Item Description
+                    </label>
+                    <input
+                      className="border-2 border-primary w-full text-sm rounded-md p-2"
+                      type="text"
+                      name="itemDesc"
+                      placeholder="Homemade patty serve with vegetable and mayo"
+                    />
+                  </div>
+
+                  <div className="w-full">
+                    <label
+                      className="block text-sm font-semibold mb-2"
+                      htmlFor=""
+                    >
+                      Item Price (RM)
+                    </label>
+                    <input
+                      className="border-2 border-primary w-full text-sm rounded-md p-2"
+                      type="text"
+                      name="itemPrice"
+                      placeholder="20.00"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <PrimaryButton type="submit" style="mt-5" label="Submit" />
           </form>
         </section>
         <Footer />

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { PrimaryButton } from "./Button";
+import { topNavMenu } from "./menu/menuList";
 
 import { useNavigate } from "react-router-dom";
 
@@ -12,29 +13,6 @@ function Topnav() {
 
   const navigate = useNavigate();
 
-  const menuItem = [
-    {
-      id: "home",
-      label: "Home",
-      path: "/",
-    },
-    {
-      id: "categories",
-      label: "Categories",
-      path: "/",
-    },
-    {
-      id: "events",
-      label: "Events",
-      path: "/",
-    },
-    {
-      id: "news",
-      label: "News",
-      path: "/",
-    },
-  ];
-
   const btnHandler = (btn: string) => {
     navigate("/login");
   };
@@ -44,19 +22,20 @@ function Topnav() {
       <div className="shadow w-full h-20 flex justify-center">
         <nav className="container flex justify-between items-center p-10">
           <div className="">
-            <img
-              className="w-14 rounded-full"
-              src="./assets/img/logo.jpeg"
-              alt=""
-            />
+            <a href="/">
+              <img
+                className="w-14 rounded-full"
+                src="./assets/img/logo.jpeg"
+                alt=""
+              />
+            </a>
           </div>
           <div
-            className={`${
-              toggle ? "top-[9%]" : "top-[-100%]"
-            } md:static absolute bg-white md:min-h-fit min-h-[30vh] left-0 md:w-auto w-full flex items-center px-5`}
+            className={`${toggle ? "top-[9%]" : "top-[-100%]"
+              } md:static absolute bg-white md:min-h-fit min-h-[30vh] left-0 md:w-auto w-full flex items-center px-5`}
           >
             <ul className="flex md:flex-row flex-col md:items-center md:gap-10 gap-8">
-              {menuItem.map((item) => (
+              {topNavMenu.map((item) => (
                 <li key={item.id}>
                   <a
                     className="hover:bg-secondary-100 px-4 py-2 rounded-md transition-all text-md font-medium text-primary"
