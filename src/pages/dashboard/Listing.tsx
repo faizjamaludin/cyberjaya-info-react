@@ -151,8 +151,8 @@ function Listing() {
             </div>
 
             <div className="w-3/5 border-2 border-primary shadow-lg rounded-md text-primary p-10 mt-12">
-              <h1 className="font-semibold text-xl mb-5">Address</h1>
-              <div className="flex flex-cols">
+              <h1 className="font-semibold text-xl mb-5">Details Overview</h1>
+              <div className="flex flex-cols ">
                 <div className="w-full">
                   <label
                     className="block text-sm font-semibold mb-2"
@@ -169,23 +169,106 @@ function Listing() {
                   ></textarea>
                 </div>
               </div>
-              <div className="flex flex-cols">
-                <div className="w-full">
-                  <label
-                    className="block text-sm font-semibold mb-2"
-                    htmlFor=""
-                  >
-                    Description
-                  </label>
-                  <textarea
-                    className="border-2 border-primary w-full text-sm rounded-md p-2"
-                    name=""
-                    id=""
-                    cols={30}
-                    rows={10}
-                  ></textarea>
+              <div className="flex flex-cols flex-wrap">
+                <div className="flex flex-row w-full gap-4">
+                  <div className="w-full">
+                    <label
+                      className="block text-sm font-semibold mb-2"
+                      htmlFor=""
+                    >
+                      Phone
+                    </label>
+                    <input
+                      className="border-2 border-primary w-full text-sm rounded-md p-2"
+                      type="text"
+                      name="phone"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <div className="w-full">
+                    <label
+                      className="block text-sm font-semibold mb-2"
+                      htmlFor=""
+                    >
+                      website
+                    </label>
+                    <input
+                      className="border-2 border-primary w-full text-sm rounded-md p-2"
+                      type="text"
+                      name="website"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <div className="w-full">
+                    <label
+                      className="block text-sm font-semibold mb-2"
+                      htmlFor=""
+                    >
+                      Email
+                    </label>
+                    <input
+                      className="border-2 border-primary w-full text-sm rounded-md p-2"
+                      type="text"
+                      name="email"
+                      placeholder=""
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-row w-full gap-4 mt-2">
+                  <div className="w-full">
+                    <label
+                      className="block text-sm font-semibold mb-2"
+                      htmlFor=""
+                    >
+                      Facebook
+                    </label>
+                    <input
+                      className="border-2 border-primary w-full text-sm rounded-md p-2"
+                      type="text"
+                      name="facebook"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <div className="w-full">
+                    <label
+                      className="block text-sm font-semibold mb-2"
+                      htmlFor=""
+                    >
+                      Instagram
+                    </label>
+                    <input
+                      className="border-2 border-primary w-full text-sm rounded-md p-2"
+                      type="text"
+                      name="instagram"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <div className="w-full">
+                    <label
+                      className="block text-sm font-semibold mb-2"
+                      htmlFor=""
+                    >
+                      Twitter
+                    </label>
+                    <input
+                      className="border-2 border-primary w-full text-sm rounded-md p-2"
+                      type="text"
+                      name="twitter"
+                      placeholder=""
+                    />
+                  </div>
                 </div>
               </div>
+            </div>
+
+            <div className="w-3/5 border-2 border-primary shadow-lg rounded-md text-primary p-10 mt-12">
+              <h1 className="font-semibold text-xl mb-5">Opening Hours</h1>
+              <div className="flex flex-cols "></div>
             </div>
           </form>
         </section>

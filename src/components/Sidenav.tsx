@@ -62,7 +62,7 @@ const Sidenav = () => {
     <nav
       className={`${
         isOpen ? "w-60" : "w-20"
-      } min-h-screen bg-white shadow-md relative p-5 pt-8 duration-300`}
+      } min-h-screen bg-white shadow-md relative p-5 pt-8 duration-500`}
     >
       <NavigateBeforeIcon
         className={`${
