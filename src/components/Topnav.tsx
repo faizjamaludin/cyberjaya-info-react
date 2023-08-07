@@ -1,21 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { PrimaryButton } from "./Button";
-import { topNavMenu } from "./menu/menuList";
+import { topNavMenu, userOption } from "./menu/menuList";
 
 import { useNavigate } from "react-router-dom";
 
+import { RootState } from "../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { isAuth } from "../features/auth/authSlice";
+
 function Topnav() {
   const [toggle, setToggle] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
-  const [btn, setBtn] = useState(false);
+  const [submenuOpen, setSubmenuOpen] = useState(false);
 
   const navigate = useNavigate();
 
-  const btnHandler = (btn: string) => {
+  const dispatch = useDispatch<any>();
+  const selectAuth = (state: RootState) => state.auth;
+  const { token, isAuthenticated } = useSelector(selectAuth);
+
+  useEffect(() => {
+    dispatch(isAuth());
+  }, [token, isAuthenticated, dispatch]);
+
+  const btnHandler = () => {
     navigate("/login");
   };
+
+  console.log(submenuOpen);
 
   return (
     <div className="w-full flex justify-center">
@@ -31,8 +44,9 @@ function Topnav() {
             </a>
           </div>
           <div
-            className={`${toggle ? "top-[9%]" : "top-[-100%]"
-              } md:static absolute bg-white md:min-h-fit min-h-[30vh] left-0 md:w-auto w-full flex items-center px-5`}
+            className={`${
+              toggle ? "top-[9%]" : "top-[-100%]"
+            } md:static absolute bg-white md:min-h-fit min-h-[30vh] left-0 md:w-auto w-full flex items-center px-5`}
           >
             <ul className="flex md:flex-row flex-col md:items-center md:gap-10 gap-8">
               {topNavMenu.map((item) => (
@@ -47,13 +61,11 @@ function Topnav() {
               ))}
             </ul>
           </div>
-          <div className="flex items-center gap-6">
-            {btn ? (
+          <div className="flex flex-col items-center  gap-6 relative">
+            {!isAuthenticated ? (
               <PrimaryButton
                 type="button"
-                onClick={() => {
-                  setBtn(!btn);
-                }}
+                onClick={btnHandler}
                 label="Sign In"
               />
             ) : (
@@ -62,10 +74,24 @@ function Topnav() {
                 src="./assets/img/user.png"
                 alt=""
                 onClick={() => {
-                  setBtn(!btn);
+                  setSubmenuOpen(!submenuOpen);
                 }}
               />
             )}
+            {submenuOpen ? (
+              <ul className="absolute left-0 top-16 w-40 bg-white border-2 rounded-md border-primary shadow-md">
+                {userOption.map((submenuItem) => (
+                  <li key={submenuItem.id}>
+                    <a
+                      className="block px-4 py-2 hover:bg-secondary-100 hover:rounded-md text-sm font-medium"
+                      href={submenuItem.path}
+                    >
+                      {submenuItem.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </div>
         </nav>
       </div>

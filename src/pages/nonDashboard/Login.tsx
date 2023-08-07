@@ -1,17 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Topnav from "../../components/Topnav";
 import Footer from "../../components/Footer";
 import { useFormik } from "formik";
 import { PrimaryButton } from "../../components/Button";
+import { RootState } from "../../redux/store";
+import { login, reset } from "../../features/auth/authSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { PacmanLoader } from "react-spinners";
 
 function Login() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch<any>();
+
+  const selectAuth = (state: RootState) => state.auth;
+  const { user, isLoading, isError, isSuccess, message } =
+    useSelector(selectAuth);
+
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (isSuccess || token) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [user, isLoading, isError, isSuccess, message, navigate, dispatch]);
+
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(login(values));
     },
   });
 
@@ -52,7 +74,15 @@ function Login() {
             />
           </div>
           <div className="w-full">
-            <PrimaryButton style="w-full mt-2" type="submit" label="Submit" />
+            {isLoading ? (
+              <PrimaryButton
+                style="mt-4 w-full flex justify-center items-center"
+                type="submit"
+                icon={<PacmanLoader color="#FFFFFF" size={9} />}
+              />
+            ) : (
+              <PrimaryButton style="w-full mt-2" type="submit" label="Submit" />
+            )}
           </div>
           <p className="text-center text-primary mt-2 mb-2">or</p>
           <p className="text-sm font-normal text-primary">

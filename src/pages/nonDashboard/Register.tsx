@@ -1,10 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Topnav from "../../components/Topnav";
 import Footer from "../../components/Footer";
 import { useFormik } from "formik";
 import { PrimaryButton } from "../../components/Button";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { register, reset } from "../../features/auth/authSlice";
+import { RootState } from "../../redux/store";
+import { PacmanLoader } from "react-spinners";
 
 function Register() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch<any>();
+
+  const selectAuth = (state: RootState) => state.auth;
+  const { user, isLoading, isError, isSuccess, message } =
+    useSelector(selectAuth);
+
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (isSuccess || user) {
+      navigate("/login");
+    }
+
+    if (token) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [user, isLoading, isSuccess, navigate, dispatch]);
+
   const formik = useFormik({
     initialValues: {
       fullName: "",
@@ -13,7 +39,8 @@ function Register() {
       cpassword: "",
     },
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
+      dispatch(register(values));
     },
   });
 
@@ -21,7 +48,10 @@ function Register() {
     <div className="w-full">
       <Topnav />
       <section className="flex justify-center items-center w-full  my-16">
-        <form onSubmit={formik.handleSubmit} className="w-96  border-2 border-primary rounded-md shadow-md p-4">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="w-96  border-2 border-primary rounded-md shadow-md p-4"
+        >
           <h1 className="text-primary text-center mt-5 font-semibold text-3xl text-primary">
             Register
           </h1>
@@ -78,7 +108,15 @@ function Register() {
             />
           </div>
           <div className="w-full">
-            <PrimaryButton style="w-full mt-2" type="submit" label="Submit" />
+            {isLoading ? (
+              <PrimaryButton
+                style="mt-4 w-full flex justify-center items-center"
+                type="submit"
+                icon={<PacmanLoader color="#FFFFFF" size={9} />}
+              />
+            ) : (
+              <PrimaryButton style="w-full mt-2" type="submit" label="Submit" />
+            )}
           </div>
           <p className="text-center text-primary mt-2 mb-2">or</p>
           <p className="text-sm font-normal text-primary">

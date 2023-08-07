@@ -5,6 +5,10 @@ import EventNoteIcon from "@mui/icons-material/EventNote";
 import ArticleIcon from "@mui/icons-material/Article";
 import BugReportIcon from "@mui/icons-material/BugReport";
 
+import { RootState } from "../../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../features/auth/authSlice";
+
 export const sideNavMenu = [
   {
     title: "Dashboard",
@@ -58,5 +62,17 @@ export const topNavMenu = [
     id: "news",
     label: "News",
     path: "/news/item",
+  },
+];
+
+export const userOption = [
+  {
+    id: 1,
+    label: "Dashboard",
+    path: "/dashboard",
+  },
+  {
+    id: 2,
+    label: "Logout",
   },
 ];

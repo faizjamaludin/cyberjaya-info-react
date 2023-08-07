@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Topnav from "../../components/Topnav";
 import Footer from "../../components/Footer";
 import { useFormik } from "formik";
 import { PrimaryButton } from "../../components/Button";
 import StarIcon from "@mui/icons-material/Star";
+import { RootState } from "../../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { isAuth } from "../../features/auth/authSlice";
 
 interface SearchProps {
   search: String;
 }
 
 function Home() {
+  const dispatch = useDispatch<any>();
+  const selectAuth = (state: RootState) => state.auth;
+  const { user, isLoading, isError, token, isAuthenticated } =
+    useSelector(selectAuth);
+
+  useEffect(() => {
+    dispatch(isAuth());
+  }, [token, isAuthenticated, dispatch]);
+
   const formik = useFormik({
     initialValues: {
       search: "",
