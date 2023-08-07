@@ -16,7 +16,9 @@ function Profile() {
       <div className="fixed">
         <Sidenav />
       </div>
-      <div className={`w-full duration-300 ${isOpen ? "ml-60" : "ml-20"}`}>
+      <div
+        className={`w-full duration-300 ${isOpen === true ? "ml-20" : "ml-60"}`}
+      >
         <section className="min-h-screen py-5 px-10 text-primary">
           <h1 className="font-medium text-2xl mt-10">Profile</h1>
         </section>

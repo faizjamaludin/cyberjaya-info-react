@@ -9,7 +9,11 @@ module.exports = {
         200: "#FFAB00",
       },
       white: "#FFFFFF",
-      text: "#0C0808",
+      text: {
+        100: "#0C0808",
+        200: "#9ca3af",
+        300: "#e5e7eb",
+      },
     },
     extend: {},
   },

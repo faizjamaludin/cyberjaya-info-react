@@ -17,11 +17,13 @@ function News() {
       <div className="fixed">
         <Sidenav />
       </div>
-      <div className={`w-full duration-300 ${isOpen ? "ml-60" : "ml-20"}`}>
+      <div
+        className={`w-full duration-300 ${isOpen === true ? "ml-20" : "ml-60"}`}
+      >
         <section className="min-h-screen py-5 px-10 text-primary">
           <h1 className="font-medium text-2xl mt-10">News</h1>
           <form className="mt-14">
-            <div className="w-3/5 border-2 border-primary shadow-lg rounded-md text-primary p-10">
+            <div className="md:w-3/5 w-full border-2 border-primary shadow-lg rounded-md text-primary p-10">
               <h1 className="font-semibold text-xl mb-5">
                 News <span className="text-secondary-200">Information</span>
               </h1>
@@ -57,7 +59,13 @@ function News() {
                   >
                     News Item
                   </label>
-                  <textarea className="border-2 border-primary w-full text-sm rounded-md p-2 outline-secondary-200" name="" id="" cols={30} rows={10}></textarea>
+                  <textarea
+                    className="border-2 border-primary w-full text-sm rounded-md p-2 outline-secondary-200"
+                    name=""
+                    id=""
+                    cols={30}
+                    rows={10}
+                  ></textarea>
                 </div>
               </div>
             </div>

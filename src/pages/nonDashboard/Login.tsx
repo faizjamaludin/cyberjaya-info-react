@@ -5,7 +5,6 @@ import { useFormik } from "formik";
 import { PrimaryButton } from "../../components/Button";
 
 function Login() {
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -19,8 +18,11 @@ function Login() {
   return (
     <div className="w-full">
       <Topnav />
-      <section className="flex justify-center items-center w-full my-16">
-        <form onSubmit={formik.handleSubmit} className="w-96  border-2 border-primary rounded-md shadow-md p-4">
+      <section className="flex justify-center items-center w-full my-40">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="w-96  border-2 border-primary rounded-md shadow-md p-4"
+        >
           <h1 className="text-primary text-center mt-5 font-semibold text-3xl text-primary">
             Login
           </h1>

@@ -16,12 +16,14 @@ function Listing() {
       <div className="fixed">
         <Sidenav />
       </div>
-      <div className={`w-full duration-300 ${isOpen ? "ml-60" : "ml-20"}`}>
+      <div
+        className={`w-full duration-300 ${isOpen === true ? "ml-20" : "ml-60"}`}
+      >
         <section className="min-h-screen py-5 px-10 text-primary">
           <h1 className="font-medium text-2xl mt-10">Listing</h1>
           <form className="mt-14" action="">
             {/* Basic Information Section */}
-            <div className="w-3/5 border-2 border-primary shadow-lg rounded-md text-primary p-10">
+            <div className="md:w-3/5 w-full border-2 border-primary shadow-lg rounded-md text-primary p-10">
               <h1 className="font-semibold text-xl mb-5">
                 Basic <span className="text-secondary-200">Information</span>
               </h1>
@@ -77,9 +79,9 @@ function Listing() {
             </div>
 
             {/* Address section */}
-            <div className="w-3/5 border-2 border-primary shadow-lg rounded-md text-primary p-10 mt-12">
+            <div className="md:w-3/5 w-full border-2 border-primary shadow-lg rounded-md text-primary p-10 mt-12">
               <h1 className="font-semibold text-xl mb-5">Address</h1>
-              <div className="grid grid-cols-2 grid-rows-2 grid-flow-row gap-4 w-full">
+              <div className="grid md:grid-cols-2 grid-cols-1 md:grid-rows-2 grid-rows-4 md:grid-flow-row grid-flow-col gap-4 w-full">
                 <div>
                   <label
                     className="block text-sm font-semibold mb-2"
@@ -146,11 +148,11 @@ function Listing() {
             </div>
 
             {/* Gallery section */}
-            <div className="w-3/5 border-2 border-primary shadow-lg rounded-md text-primary p-10 mt-12">
+            <div className="md:w-3/5 w-full border-2 border-primary shadow-lg rounded-md text-primary p-10 mt-12">
               <h1 className="font-semibold text-xl mb-5">Gallery</h1>
             </div>
 
-            <div className="w-3/5 border-2 border-primary shadow-lg rounded-md text-primary p-10 mt-12">
+            <div className="md:w-3/5 w-full border-2 border-primary shadow-lg rounded-md text-primary p-10 mt-12">
               <h1 className="font-semibold text-xl mb-5">Details Overview</h1>
               <div className="flex flex-col ">
                 <div className="w-full">
@@ -170,7 +172,7 @@ function Listing() {
                 </div>
               </div>
               <div className="flex flex-col flex-wrap">
-                <div className="flex flex-row w-full gap-4">
+                <div className="flex md:flex-row flex-col w-full gap-4">
                   <div className="w-full">
                     <label
                       className="block text-sm font-semibold mb-2"
@@ -217,7 +219,7 @@ function Listing() {
                   </div>
                 </div>
 
-                <div className="flex flex-row w-full gap-4 mt-2">
+                <div className="flex md:flex-row flex-col w-full gap-4 mt-2">
                   <div className="w-full">
                     <label
                       className="block text-sm font-semibold mb-2"
@@ -266,14 +268,13 @@ function Listing() {
               </div>
             </div>
 
-            <div className="w-3/5 border-2 border-primary shadow-lg rounded-md text-primary p-10 mt-12">
+            <div className="md:w-3/5 w-full border-2 border-primary shadow-lg rounded-md text-primary p-10 mt-12">
               <h1 className="font-semibold text-xl mb-5">Opening Hours</h1>
               <div className="flex flex-col "></div>
             </div>
 
-
             {/* Pricing section */}
-            <div className="w-3/5 border-2 border-primary shadow-lg rounded-md text-primary p-10 mt-12">
+            <div className="md:w-3/5 w-full border-2 border-primary shadow-lg rounded-md text-primary p-10 mt-12">
               <h1 className="font-semibold text-xl mb-5">Pricing</h1>
               <div className="flex flex-col ">
                 <div className="w-full">
@@ -290,7 +291,7 @@ function Listing() {
                     placeholder="Burger"
                   />
                 </div>
-                <div className="flex flex-row w-full gap-4 mt-2">
+                <div className="flex md:flex-row flex-col w-full gap-4 mt-2">
                   <div className="w-full">
                     <label
                       className="block text-sm font-semibold mb-2"
@@ -348,34 +349,3 @@ function Listing() {
 }
 
 export default Listing;
-
-// Basic Information
-// - Type Listing
-//   - Restaurant
-//   - Homemade
-
-// - Listing Category
-//  - Food
-//  - Beverages
-//  - Food & Beverages
-
-// Address
-// - address 1
-// - address 2
-// - Zip/ Postal Code
-// - Area
-
-// Gallery
-
-// Details Overview
-// - textarea
-// - Phone
-// - Website
-// - Email
-// - Facebook
-// - Instagram
-// - Twitter
-
-// Opening Hours
-
-// Pricing

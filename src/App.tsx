@@ -13,6 +13,10 @@ import Profile from "./pages/dashboard/Profile";
 import Events from "./pages/dashboard/Events";
 import News from "./pages/dashboard/News";
 import Testing from "./pages/dashboard/Testing";
+import ListingPage from "./pages/nonDashboard/ListingPage";
+import ItemListingPage from "./pages/nonDashboard/ItemListingPage";
+import EventsPage from "./pages/nonDashboard/EventsPage";
+import NewsPage from "./pages/nonDashboard/NewsPage";
 
 function App() {
   return (
@@ -20,6 +24,10 @@ function App() {
       <Routes>
         {/* nondashboard view */}
         <Route path="/" element={<Home />} />
+        <Route path="/categories/homemade" element={<ListingPage />} />
+        <Route path="/categories/homemade/item" element={<ItemListingPage />} />
+        <Route path="/events/item" element={<EventsPage />} />
+        <Route path="/news/item" element={<NewsPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -30,7 +38,6 @@ function App() {
         <Route path="/dashboard/testing" element={<Testing />} />
       </Routes>
     </BrowserRouter>
-
   );
 }
 

@@ -44,7 +44,7 @@ function Footer() {
       <footer className="container h-44 bottom-0 grid md:grid-cols-3 gap-4">
         {/* 1st grid */}
         <div className="flex md:justify-start justify-center justify-start items-center w-full">
-          <a href="">
+          <a href="/">
             <img
               className="w-20 rounded-full "
               src="./assets/img/logo.jpeg"
@@ -88,18 +88,18 @@ function Footer() {
               faiz.jamaludin02@gmail.com
             </a>
             <div className="flex gap-10 pt-5">
-              <a className="text-primary hover:text-secondary-200" href="">
+              <a className="text-primary hover:text-secondary-200" href="/">
                 <TwitterIcon fontSize="large" />
               </a>
               <a
                 className="text-primary text-sm hover:text-secondary-200"
-                href=""
+                href="/"
               >
                 <LinkedInIcon fontSize="large" />
               </a>
               <a
                 className="text-primary text-sm hover:text-secondary-200"
-                href=""
+                href="/"
               >
                 <InstagramIcon fontSize="large" />
               </a>
