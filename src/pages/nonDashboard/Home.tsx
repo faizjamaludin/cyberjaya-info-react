@@ -27,12 +27,12 @@ function Home() {
 
   // News state redux
   const selectNews = (state: RootState) => state.news;
-  const { newsItem } = useSelector(selectNews);
+  const { newsItem }: any = useSelector(selectNews);
 
   useEffect(() => {
     dispatch(isAuth());
     dispatch(getAllNews());
-  }, [token, isAuthenticated, dispatch]);
+  }, [token, isAuthenticated, isAuth, dispatch]);
 
   const formik = useFormik({
     initialValues: {
@@ -43,8 +43,6 @@ function Home() {
       console.log("Form submitted!", values);
     },
   });
-
-  const visibleNews = showAllNews ? newsItem : newsItem?.slice(0, 4);
 
   return (
     <div className="w-full justify-center items-center flex flex-col">
@@ -195,11 +193,13 @@ function Home() {
             <h1 className="text-primary font-semibold text-lg mb-5">
               Cyberjaya <span className="text-secondary-200">News</span>
             </h1>
-            {newsItem ? (
+            {!newsItem ? (
+              <p>Loading...</p>
+            ) : (
               <>
                 <div className="grid md:grid-cols-2 grid-flow-cols gap-10">
                   {/* item box */}
-                  {newsItem?.slice(0, 4).map((item) => (
+                  {newsItem.slice(0, 4).map((item: any) => (
                     <div
                       key={item._id}
                       onClick={() => {
@@ -216,7 +216,9 @@ function Home() {
                       </div>
                       <div className="border-l-2 border-primary w-full p-2 flex flex-col">
                         <h1 className="font-bold text-xl text-primary">
-                          {item.newsTitle}
+                          {item.newsTitle.length > 70
+                            ? item.newsTitle.substring(0, 70).trimEnd() + "..."
+                            : item.newsTitle}
                         </h1>
                         <p className="pt-2 text-primary font-normal text-md flex-1 line-clamp-2">
                           {item.newsInfo?.substring(0, 100).trimEnd() + "..."}
@@ -240,7 +242,7 @@ function Home() {
                   )}
                 </div>
               </>
-            ) : null}
+            )}
           </div>
         </section>
       </div>

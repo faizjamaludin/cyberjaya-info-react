@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Topnav from "../../components/Topnav";
 import Footer from "../../components/Footer";
+import dateFormat from "dateformat";
 
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,15 +10,15 @@ import { getNews } from "../../features/news/newsSlice";
 
 function NewsPage() {
   const dispatch = useDispatch<any>();
-  const selectNews = (state: RootState) => state.news.newsItem;
-  const item: any = useSelector(selectNews);
+  const selectNews = (state: RootState) => state.news;
+  const { newsTitle, newsInfo, newsDate }: any = useSelector(selectNews);
   const { id } = useParams();
-
-  console.log(item);
 
   useEffect(() => {
     dispatch(getNews(id));
-  }, [dispatch]);
+  }, [dispatch, newsTitle, newsInfo, newsDate]);
+
+  console.log(newsInfo);
 
   return (
     <div className="w-full justify-center items-center flex flex-col">
@@ -29,12 +30,15 @@ function NewsPage() {
           </div>
           <div className="flex flex-col mt-10">
             <div className="flex justify-between flex-col md:flex-row">
-              <div className="">
-                <h1 className="font-semibold text-4xl text-primary mt-1">
-                  {item?.newsTitle}
+              <div className="md:w-9/12 w-full">
+                <h1 className="font-semibold text-4xl text-primary">
+                  {newsTitle}
                 </h1>
-                <div className="mt-10 md:w-9/12 w-full">
-                  <p className="text-primary">{item?.newsInfo}</p>
+                <p className="text-sm text-text-200 font-medium mt-1">
+                  {dateFormat(newsDate, "dddd, dS mmmm yyyy")}
+                </p>
+                <div className="mt-10 whitespace-pre-wrap">
+                  <p className="text-primary">{newsInfo}</p>
                 </div>
               </div>
             </div>

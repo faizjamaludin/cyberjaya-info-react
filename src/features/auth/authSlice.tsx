@@ -1,7 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import React from "react";
 import authService from "../service/authService";
-import { useNavigate } from "react-router-dom";
 
 interface UserType {
   fullName?: string;

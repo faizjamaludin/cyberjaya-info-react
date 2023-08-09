@@ -12,10 +12,16 @@ interface NewsType {
 
 export interface NewsState {
   newsItem: NewsType[] | null;
+  newsTitle?: string;
+  newsInfo?: string;
+  date?: Date | null;
 }
 
 const initialState: NewsState = {
-  newsItem: null,
+  newsItem: [],
+  newsTitle: "",
+  newsInfo: "",
+  date: null,
 };
 
 export const addNews = createAsyncThunk(
@@ -79,7 +85,9 @@ export const newsSlice = createSlice({
         state.newsItem = action.payload;
       })
       .addCase(getNews.fulfilled, (state, action: any) => {
-        state.newsItem = action.payload;
+        state.newsTitle = action.payload.newsTitle;
+        state.newsInfo = action.payload.newsInfo;
+        state.date = action.payload.date;
       });
   },
 });
