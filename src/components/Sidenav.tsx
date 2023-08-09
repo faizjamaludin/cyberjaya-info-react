@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { openclose } from "../redux/resize/resizeSlice";
-import { RootState } from "../redux/store";
+import { openCloseSideNav } from "../features/resize/resizeSlice";
+import { RootState } from "../features/store";
 import { sideNavMenu } from "./menu/menuList";
+import { isAuth } from "../features/auth/authSlice";
 
 import { PrimaryButton } from "./Button";
 
@@ -12,28 +13,38 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 const Sidenav = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const selectIsOpen = (state: RootState) => state.resize.isOpen;
-  const isOpen = useSelector(selectIsOpen);
+  const dispatch = useDispatch<any>();
+  const selectIsOpen = (state: RootState) => state.resize;
+  const selectIsAuthenticated = (state: RootState) => state.auth;
+  const { isOpen } = useSelector(selectIsOpen);
+  const { isAuthenticated, token } = useSelector(selectIsAuthenticated);
 
   const location = useLocation();
   const currentPath = location.pathname;
+
+  useEffect(() => {
+    dispatch(isAuth());
+  }, [isOpen, isAuthenticated, dispatch]);
 
   const handleNavigate = () => {
     navigate("/");
   };
 
+  const handleOpen = () => {
+    dispatch(openCloseSideNav());
+  };
+
   return (
     <nav
       className={`${
-        isOpen === true ? "w-20" : "w-60"
+        isOpen ? "w-20" : "w-60"
       } min-h-screen bg-white shadow-md relative p-5 pt-8 duration-500`}
     >
       <NavigateBeforeIcon
         className={`${
           isOpen === true && "rotate-180"
         } absolute text-white bg-primary -right-2 top-5 p-px rounded-full cursor-pointer shadow `}
-        onClick={() => dispatch(openclose())}
+        onClick={handleOpen}
         fontSize="small"
       />
 

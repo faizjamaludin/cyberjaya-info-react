@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Topnav from "../../components/Topnav";
 import Footer from "../../components/Footer";
+import dateFormat from "dateformat";
 import { useFormik } from "formik";
 import { PrimaryButton } from "../../components/Button";
 import StarIcon from "@mui/icons-material/Star";
-import { RootState } from "../../redux/store";
+import { RootState } from "../../features/store";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { isAuth } from "../../features/auth/authSlice";
+import { getAllNews } from "../../features/news/newsSlice";
 
 interface SearchProps {
   search: String;
@@ -14,12 +18,20 @@ interface SearchProps {
 
 function Home() {
   const dispatch = useDispatch<any>();
+  const navigate = useNavigate();
+  const [showAllNews, setShowAllNews] = useState(false);
+
+  // Auth state redux
   const selectAuth = (state: RootState) => state.auth;
-  const { user, isLoading, isError, token, isAuthenticated } =
-    useSelector(selectAuth);
+  const { token, isAuthenticated } = useSelector(selectAuth);
+
+  // News state redux
+  const selectNews = (state: RootState) => state.news;
+  const { newsItem } = useSelector(selectNews);
 
   useEffect(() => {
     dispatch(isAuth());
+    dispatch(getAllNews());
   }, [token, isAuthenticated, dispatch]);
 
   const formik = useFormik({
@@ -32,10 +44,12 @@ function Home() {
     },
   });
 
+  const visibleNews = showAllNews ? newsItem : newsItem?.slice(0, 4);
+
   return (
     <div className="w-full justify-center items-center flex flex-col">
       <Topnav />
-      <div className="container flex justify-center items-center flex-col">
+      <div className="md:container px-10 md:px-0 flex justify-center items-center flex-col">
         <header className="grid grid-rows-3 md:mt-28 place-items-center">
           {/* grid 1 */}
           <div className="hidden justify-between items-center gap-20 md:flex">
@@ -181,53 +195,52 @@ function Home() {
             <h1 className="text-primary font-semibold text-lg mb-5">
               Cyberjaya <span className="text-secondary-200">News</span>
             </h1>
-            <div className="grid grid-cols-2 gap-10">
-              {/* item box */}
-              <div className="w-full flex flex-row h-40 cursor-pointer border-2 border-primary rounded-xl shadow-xl hover:shadow-md hover:translate-x-px hover:translate-y-px">
-                <div className="w-52 h-40 flex justify-center items-center">
-                  <img
-                    className="object-cover w-52 h-36"
-                    src="assets/img/Taco_Bell.png"
-                    alt=""
-                  />
+            {newsItem ? (
+              <>
+                <div className="grid md:grid-cols-2 grid-flow-cols gap-10">
+                  {/* item box */}
+                  {newsItem?.slice(0, 4).map((item) => (
+                    <div
+                      key={item._id}
+                      onClick={() => {
+                        navigate("/news/" + item._id);
+                      }}
+                      className="w-full flex flex-row h-40 cursor-pointer border-2 border-primary rounded-xl shadow-xl hover:shadow-md hover:translate-x-px hover:translate-y-px"
+                    >
+                      <div className="w-52 h-40 flex justify-center items-center">
+                        <img
+                          className="object-cover w-52 h-36"
+                          src="assets/img/Taco_Bell.png"
+                          alt=""
+                        />
+                      </div>
+                      <div className="border-l-2 border-primary w-full p-2 flex flex-col">
+                        <h1 className="font-bold text-xl text-primary">
+                          {item.newsTitle}
+                        </h1>
+                        <p className="pt-2 text-primary font-normal text-md flex-1 line-clamp-2">
+                          {item.newsInfo?.substring(0, 100).trimEnd() + "..."}
+                        </p>
+                        <p className="text-sm text-primary text-end font-medium pt-2">
+                          {dateFormat(item.date, "mmmm dS, yyyy")}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <div className="border-l-2 border-primary w-full p-2 relative">
-                  <h1 className="font-bold text-xl text-primary">
-                    Amaran Hujan Lebat Hari Ini
-                  </h1>
-                  <p className="pt-2 text-primary font-normal text-md">
-                    Orang ramai dinasihatkan sentiasa merujuk laman web
-                    www.met.gov.my dan semua media sosial serta memuat turun
-                    aplikasi myCuaca bagi maklumat yang terkini dan sahih
-                  </p>
-                  <p className="text-sm text-primary font-medium pt-2 absolute right-4">
-                    3 March 2023
-                  </p>
+                <div className="w-full flex flex-row justify-end mt-5">
+                  {/* "See More" link */}
+                  {!showAllNews && (newsItem?.length ?? 0) > 4 && (
+                    <a
+                      className="text-sm text-primary font-medium hover:text-secondary-200"
+                      href="/news/item"
+                    >
+                      See More...
+                    </a>
+                  )}
                 </div>
-              </div>
-              <div className="w-full flex flex-row h-40 cursor-pointer border-2 border-primary rounded-xl shadow-xl hover:shadow-md hover:translate-x-px hover:translate-y-px">
-                <div className="w-52 h-40 flex justify-center items-center">
-                  <img
-                    className="object-cover w-52 h-36"
-                    src="assets/img/Taco_Bell.png"
-                    alt=""
-                  />
-                </div>
-                <div className="border-l-2 border-primary w-full p-2 relative">
-                  <h1 className="font-bold text-xl text-primary">
-                    Amaran Hujan Lebat Hari Ini
-                  </h1>
-                  <p className="pt-2 text-primary font-normal text-md">
-                    Orang ramai dinasihatkan sentiasa merujuk laman web
-                    www.met.gov.my dan semua media sosial serta memuat turun
-                    aplikasi myCuaca bagi maklumat yang terkini dan sahih
-                  </p>
-                  <p className="text-sm text-primary font-medium pt-2 absolute right-4">
-                    3 March 2023
-                  </p>
-                </div>
-              </div>
-            </div>
+              </>
+            ) : null}
           </div>
         </section>
       </div>

@@ -5,10 +5,6 @@ import EventNoteIcon from "@mui/icons-material/EventNote";
 import ArticleIcon from "@mui/icons-material/Article";
 import BugReportIcon from "@mui/icons-material/BugReport";
 
-import { RootState } from "../../redux/store";
-import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../features/auth/authSlice";
-
 export const sideNavMenu = [
   {
     title: "Dashboard",

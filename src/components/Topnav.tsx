@@ -6,9 +6,9 @@ import { topNavMenu, userOption } from "./menu/menuList";
 
 import { useNavigate } from "react-router-dom";
 
-import { RootState } from "../redux/store";
+import { RootState } from "../features/store";
 import { useSelector, useDispatch } from "react-redux";
-import { isAuth } from "../features/auth/authSlice";
+import { isAuth, logout } from "../features/auth/authSlice";
 
 function Topnav() {
   const [toggle, setToggle] = useState(false);
@@ -28,7 +28,10 @@ function Topnav() {
     navigate("/login");
   };
 
-  console.log(submenuOpen);
+  const handleLogout = () => {
+    dispatch(logout());
+    setSubmenuOpen(false);
+  };
 
   return (
     <div className="w-full flex justify-center">
@@ -82,12 +85,22 @@ function Topnav() {
               <ul className="absolute left-0 top-16 w-40 bg-white border-2 rounded-md border-primary shadow-md">
                 {userOption.map((submenuItem) => (
                   <li key={submenuItem.id}>
-                    <a
-                      className="block px-4 py-2 hover:bg-secondary-100 hover:rounded-md text-sm font-medium"
-                      href={submenuItem.path}
-                    >
-                      {submenuItem.label}
-                    </a>
+                    {submenuItem.label === "Logout" ? (
+                      <a
+                        className="block px-4 py-2 hover:bg-secondary-100 hover:rounded-md text-sm font-medium"
+                        href="#"
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </a>
+                    ) : (
+                      <a
+                        className="block px-4 py-2 hover:bg-secondary-100 hover:rounded-md text-sm font-medium"
+                        href={submenuItem.path}
+                      >
+                        {submenuItem.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

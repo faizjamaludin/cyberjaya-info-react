@@ -13,6 +13,7 @@ const register = async (userData: any) => {
   return response.data;
 };
 
+// Login User
 const login = async (userData: any) => {
   const response = await axios.get(API_URL + "login", {
     params: { email: userData.email, password: userData.password },

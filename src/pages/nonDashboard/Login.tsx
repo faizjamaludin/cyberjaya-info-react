@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Topnav from "../../components/Topnav";
 import Footer from "../../components/Footer";
 import { useFormik } from "formik";
 import { PrimaryButton } from "../../components/Button";
-import { RootState } from "../../redux/store";
+import { RootState } from "../../features/store";
 import { login, reset } from "../../features/auth/authSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +25,7 @@ function Login() {
     }
 
     dispatch(reset());
-  }, [user, isLoading, isError, isSuccess, message, navigate, dispatch]);
+  }, [user, isLoading, isError, isSuccess, message, navigate, dispatch, token]);
 
   const formik = useFormik({
     initialValues: {

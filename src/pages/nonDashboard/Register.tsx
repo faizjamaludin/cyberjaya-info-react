@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Topnav from "../../components/Topnav";
 import Footer from "../../components/Footer";
 import { useFormik } from "formik";
@@ -6,7 +6,7 @@ import { PrimaryButton } from "../../components/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register, reset } from "../../features/auth/authSlice";
-import { RootState } from "../../redux/store";
+import { RootState } from "../../features/store";
 import { PacmanLoader } from "react-spinners";
 
 function Register() {
@@ -14,8 +14,7 @@ function Register() {
   const dispatch = useDispatch<any>();
 
   const selectAuth = (state: RootState) => state.auth;
-  const { user, isLoading, isError, isSuccess, message } =
-    useSelector(selectAuth);
+  const { user, isLoading, isSuccess } = useSelector(selectAuth);
 
   const token = localStorage.getItem("token");
 
@@ -29,7 +28,7 @@ function Register() {
     }
 
     dispatch(reset());
-  }, [user, isLoading, isSuccess, navigate, dispatch]);
+  }, [user, isLoading, isSuccess, navigate, dispatch, token]);
 
   const formik = useFormik({
     initialValues: {

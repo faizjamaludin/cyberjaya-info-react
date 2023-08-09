@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Topnav from "../../components/Topnav";
 import Footer from "../../components/Footer";
 
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../features/store";
+import { getNews } from "../../features/news/newsSlice";
+
 function NewsPage() {
+  const dispatch = useDispatch<any>();
+  const selectNews = (state: RootState) => state.news.newsItem;
+  const item: any = useSelector(selectNews);
+  const { id } = useParams();
+
+  console.log(item);
+
+  useEffect(() => {
+    dispatch(getNews(id));
+  }, [dispatch]);
+
   return (
     <div className="w-full justify-center items-center flex flex-col">
       <Topnav />
@@ -15,14 +31,10 @@ function NewsPage() {
             <div className="flex justify-between flex-col md:flex-row">
               <div className="">
                 <h1 className="font-semibold text-4xl text-primary mt-1">
-                  Amaran Hujan Lebat Hari Ini
+                  {item?.newsTitle}
                 </h1>
                 <div className="mt-10 md:w-9/12 w-full">
-                  <p className="text-primary">
-                    Orang ramai dinasihatkan sentiasa merujuk laman web
-                    www.met.gov.my dan semua media sosial serta memuat turun
-                    aplikasi myCuaca bagi maklumat yang terkini dan sahih
-                  </p>
+                  <p className="text-primary">{item?.newsInfo}</p>
                 </div>
               </div>
             </div>

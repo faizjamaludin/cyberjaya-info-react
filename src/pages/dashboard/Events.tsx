@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { openclose } from "../../redux/resize/resizeSlice";
-import { RootState } from "../../redux/store";
+import { RootState } from "../../features/store";
 
 import { PrimaryButton } from "../../components/Button";
 import Sidenav from "../../components/Sidenav";
@@ -9,8 +8,8 @@ import Topnav from "../../components/Topnav";
 import Footer from "../../components/Footer";
 
 function Events() {
-  const selectIsOpen = (state: RootState) => state.resize.isOpen;
-  const isOpen = useSelector(selectIsOpen);
+  const selectIsOpen = (state: RootState) => state.resize;
+  const { isOpen } = useSelector(selectIsOpen);
 
   return (
     <div className="w-full flex flex-row">
