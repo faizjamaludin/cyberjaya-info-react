@@ -10,7 +10,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { isAuth } from "../../features/auth/authSlice";
+
 import { getAllNews } from "../../features/news/newsSlice";
+import { getAllEvent } from "../../features/event/eventSlice";
 
 interface SearchProps {
   search: String;
@@ -29,10 +31,17 @@ function Home() {
   const selectNews = (state: RootState) => state.news;
   const { newsItem }: any = useSelector(selectNews);
 
+  // Event state redux
+  const selectEvent = (state: RootState) => state.event
+  const { eventItem }: any = useSelector(selectEvent)
+
   useEffect(() => {
     dispatch(isAuth());
     dispatch(getAllNews());
+    dispatch(getAllEvent());
   }, [token, isAuthenticated, isAuth, dispatch]);
+
+  console.log(eventItem)
 
   const formik = useFormik({
     initialValues: {
@@ -155,35 +164,35 @@ function Home() {
 
         {/* Events section */}
         <section className="flex flex-col justify-start items-center w-full mt-20">
-          <div className="">
+          <div className="w-full">
             <h1 className="text-primary font-semibold text-lg mb-5">Events</h1>
-            <div className="grid grid-cols-7 gap-10">
-              {/* item box */}
-              <div className="w-48 h-60 cursor-pointer border-2 border-primary rounded-xl shadow-xl hover:shadow-md hover:translate-x-px hover:translate-y-px">
-                <img
-                  className="w-48 h-36 object-contain"
-                  src="/assets/img/Taco_Bell.png"
-                  alt=""
-                />
-                <div className="border-t-2 border-primary mt-1 flex flex-col p-1">
-                  <div className="flex flex-row justify-between items-center">
-                    <h1 className="text-lg font-semibold text-primary">
-                      Tacod bell
-                    </h1>
-                    <p className="font-semibold text-primary text-sm">
-                      <span className="text-secondary-200">
-                        <StarIcon fontSize="small" />
-                      </span>{" "}
-                      4.6/5
-                    </p>
+            {!eventItem ? <p>Loading...</p> : (<>
+              <div className="grid grid-cols-7 gap-10">
+                {/* item box */}
+                {eventItem.slice(0, 7).map((item: any) => (
+                  <div key={item._id} onClick={() => { navigate('/event/' + item._id) }} className="w-48 h-60 cursor-pointer border-2 border-primary rounded-xl shadow-xl hover:shadow-md hover:translate-x-px hover:translate-y-px">
+                    <img
+                      className="w-48 h-36 object-contain"
+                      src="/assets/img/lorong_belakang.jpeg"
+                      alt=""
+                    />
+                    <div className="border-t-2 border-primary mt-1 flex flex-col p-1">
+                      <div className="flex flex-row justify-between items-center">
+                        <h1 className="text-lg font-semibold text-primary">
+                          {item.eventTitle.length > 15
+                            ? item.eventTitle.subString(0, 15).trimEnd("...")
+                            : item.eventTitle}
+                        </h1>
+                      </div>
+                      <p className="block text-primary font-medium text-base pt-px">
+                        Cyberjaya
+                      </p>
+                      <p className="block text-sm">{item.eventLocation}</p>
+                    </div>
                   </div>
-                  <p className="block text-primary font-medium text-base pt-px">
-                    Cyberjaya
-                  </p>
-                  <p className="block text-sm">Homemade</p>
-                </div>
+                ))}
               </div>
-            </div>
+            </>)}
           </div>
         </section>
 
@@ -209,7 +218,7 @@ function Home() {
                     >
                       <div className="w-52 h-40 flex justify-center items-center">
                         <img
-                          className="object-cover w-52 h-36"
+                          className="object-contain w-52 h-36"
                           src="assets/img/Taco_Bell.png"
                           alt=""
                         />

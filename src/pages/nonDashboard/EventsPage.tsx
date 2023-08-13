@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Topnav from "../../components/Topnav";
 import Footer from "../../components/Footer";
 
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../features/store";
+import { getEvent } from "../../features/event/eventSlice";
+
 function EventsPage() {
+  const dispatch = useDispatch<any>();
+  const selectEvent = (state: RootState) => state.event;
+  const { eventTitle, eventDesc, eventLocation, from, to }: any = useSelector(selectEvent);
+  const { id } = useParams();
+
+
+  useEffect(() => {
+    dispatch(getEvent(id))
+  }, [dispatch, eventTitle, eventDesc, eventLocation, from, to])
+
+
   return (
     <div className="w-full justify-center items-center flex flex-col">
       <Topnav />
@@ -13,15 +29,13 @@ function EventsPage() {
           </div>
           <div className="flex flex-col mt-10">
             <div className="flex justify-between flex-col md:flex-row">
-              <div className="">
+              <div className="md:w-7/12 w-full">
                 <h1 className="font-semibold text-4xl text-primary mt-1">
-                  Lorong Belakang
+                  {eventTitle}
                 </h1>
-                <div className="mt-10 md:w-9/12 w-full">
-                  <p className="text-primary">
-                    To check if the form data is valid using validators, you can
-                    utilize the FormGroup's valid property. Here's an example of
-                    how you can check if the form is valid:
+                <div className="mt-10">
+                  <p className="text-primary whitespace-pre-wrap">
+                    {eventDesc}
                   </p>
                 </div>
               </div>
