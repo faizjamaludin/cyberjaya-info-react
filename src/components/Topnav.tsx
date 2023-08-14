@@ -4,7 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { PrimaryButton } from "./Button";
 import { topNavMenu, userOption } from "./menu/menuList";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { RootState } from "../features/store";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,6 +15,8 @@ function Topnav() {
   const [submenuOpen, setSubmenuOpen] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const dispatch = useDispatch<any>();
   const selectAuth = (state: RootState) => state.auth;
@@ -41,7 +43,7 @@ function Topnav() {
             <a href="/">
               <img
                 className="w-14 rounded-full"
-                src="./assets/img/logo.jpeg"
+                src="/assets/img/logo.jpeg"
                 alt=""
               />
             </a>
@@ -55,7 +57,11 @@ function Topnav() {
               {topNavMenu.map((item) => (
                 <li key={item.id}>
                   <a
-                    className="hover:bg-secondary-100 px-4 py-2 rounded-md transition-all text-md font-medium text-primary"
+                    className={`hover:bg-secondary-100 px-4 py-2 rounded-md transition-all text-md font-medium text-primary ${
+                      currentPath === item.path
+                        ? "bg-secondary-100 rounded-md"
+                        : ""
+                    }`}
                     href={item.path}
                   >
                     {item.label}
@@ -74,7 +80,7 @@ function Topnav() {
             ) : (
               <img
                 className="w-14 cursor-pointer rounded-full"
-                src="./assets/img/user.png"
+                src="/assets/img/user.png"
                 alt=""
                 onClick={() => {
                   setSubmenuOpen(!submenuOpen);

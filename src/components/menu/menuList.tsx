@@ -52,12 +52,12 @@ export const topNavMenu = [
   {
     id: "events",
     label: "Events",
-    path: "/events/item",
+    path: "/events/",
   },
   {
     id: "news",
     label: "News",
-    path: "/news/item",
+    path: "/news/",
   },
 ];
 

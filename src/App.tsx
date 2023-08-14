@@ -16,7 +16,9 @@ import Testing from "./pages/dashboard/Testing";
 import ListingPage from "./pages/nonDashboard/ListingPage";
 import ItemListingPage from "./pages/nonDashboard/ItemListingPage";
 import EventsPage from "./pages/nonDashboard/EventsPage";
+import ItemEventPage from "./pages/nonDashboard/ItemEventPage";
 import NewsPage from "./pages/nonDashboard/NewsPage";
+import ItemNewsPage from "./pages/nonDashboard/ItemNewsPage";
 
 function App() {
   return (
@@ -26,8 +28,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/categories/homemade" element={<ListingPage />} />
         <Route path="/categories/homemade/item" element={<ItemListingPage />} />
-        <Route path="/event/:id" element={<EventsPage />} />
-        <Route path="/news/:id" element={<NewsPage />} />
+        <Route path="/events/" element={<EventsPage />} />
+        <Route path="/event/:id" element={<ItemEventPage />} />
+        <Route path="/news/" element={<NewsPage />} />
+        <Route path="/news/:id" element={<ItemNewsPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
