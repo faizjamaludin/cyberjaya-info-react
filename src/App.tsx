@@ -4,14 +4,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserRoute from "./routes/UserRoute";
 import AdminRoute from "./routes/AdminRoute";
 
-import Home from "./pages/nonDashboard/Home";
-import Login from "./pages/nonDashboard/Login";
-import Register from "./pages/nonDashboard/Register";
+// Dashboard
 import Dashboard from "./pages/dashboard/Dashboard";
 import Listing from "./pages/dashboard/Listing";
 import Profile from "./pages/dashboard/Profile";
 import Events from "./pages/dashboard/Events";
 import News from "./pages/dashboard/News";
+import AddNews from "./pages/dashboard/AddNews";
+
+// non dashboard
+import Home from "./pages/nonDashboard/Home";
+import Login from "./pages/nonDashboard/Login";
+import Register from "./pages/nonDashboard/Register";
 import Testing from "./pages/dashboard/Testing";
 import ListingPage from "./pages/nonDashboard/ListingPage";
 import ItemListingPage from "./pages/nonDashboard/ItemListingPage";
@@ -34,11 +38,14 @@ function App() {
         <Route path="/news/:id" element={<ItemNewsPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* dashboard view */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/listing" element={<Listing />} />
         <Route path="/dashboard/profile" element={<Profile />} />
         <Route path="/dashboard/events" element={<Events />} />
         <Route path="/dashboard/news" element={<News />} />
+        <Route path="/dashboard/news/addnews" element={<AddNews />} />
         <Route path="/dashboard/testing" element={<Testing />} />
       </Routes>
     </BrowserRouter>

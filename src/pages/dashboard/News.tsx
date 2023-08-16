@@ -5,26 +5,40 @@ import { RootState } from "../../features/store";
 import { PrimaryButton } from "../../components/Button";
 import Sidenav from "../../components/Sidenav";
 import Footer from "../../components/Footer";
-import { useFormik } from "formik";
-import { addNews } from "../../features/news/newsSlice";
+import { useNavigate } from "react-router-dom";
+import DataTable from 'react-data-table-component';
 
 function News() {
   const selectIsOpen = (state: RootState) => state.resize;
   const { isOpen } = useSelector(selectIsOpen);
   const dispatch = useDispatch<any>();
+  const navigate = useNavigate();
 
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => { }, [dispatch]);
 
-  const formik = useFormik({
-    initialValues: {
-      newsTitle: "",
-      newsInfo: "",
+  const columns = [
+    {
+      name: 'Title',
+      selector: (row: any) => row.title,
     },
-    onSubmit: (values) => {
-      console.log(values);
-      dispatch(addNews(values));
+    {
+      name: 'Year',
+      selector: (row: any) => row.year,
     },
-  });
+  ];
+
+  const data = [
+    {
+      id: 1,
+      title: 'Beetlejuice',
+      year: '1988',
+    },
+    {
+      id: 2,
+      title: 'Ghostbusters',
+      year: '1984',
+    },
+  ]
 
   return (
     <div className="w-full flex flex-row">
@@ -34,55 +48,16 @@ function News() {
       <div
         className={`w-full duration-300 ${isOpen === true ? "ml-20" : "ml-60"}`}
       >
-        <section className="min-h-screen py-5 px-10 text-primary">
-          <h1 className="font-medium text-2xl mt-10">News</h1>
-          <form onSubmit={formik.handleSubmit} className="mt-14">
-            <div className="md:w-3/5 w-full border-2 border-primary shadow-lg rounded-md text-primary p-10">
-              <h1 className="font-semibold text-xl mb-5">
-                News <span className="text-secondary-200">Information</span>
-              </h1>
-              <div className="flex flex-col gap-4 w-full">
-                <div className="">
-                  <label className="block text-sm font-semibold mb-2">
-                    News Title
-                  </label>
-                  <input
-                    className="border-2 border-primary w-full text-sm rounded-md p-2 outline-secondary-200"
-                    type="text"
-                    name="newsTitle"
-                    placeholder=""
-                    value={formik.values.newsTitle}
-                    onChange={formik.handleChange}
-                  />
-                </div>
+        <section className="min-h-screen w-11/12 py-5 px-10 text-primary">
+          <div className="flex justify-between items-center mt-10">
+            <h1 className="font-medium text-2xl">News</h1>
+            <PrimaryButton label="+ Add News" onClick={() => { navigate('/dashboard/news/addnews') }} />
+          </div>
+          <DataTable
+            columns={columns}
+            data={data}
+          />
 
-                <div className="">
-                  <label className="block text-sm font-semibold mb-2">
-                    News Image
-                  </label>
-                </div>
-
-                <div className="">
-                  <label
-                    className="block text-sm font-semibold mb-2"
-                    htmlFor=""
-                  >
-                    News Item
-                  </label>
-                  <textarea
-                    className="border-2 border-primary w-full text-sm rounded-md p-2 outline-secondary-200"
-                    name="newsInfo"
-                    id=""
-                    cols={30}
-                    rows={10}
-                    value={formik.values.newsInfo}
-                    onChange={formik.handleChange}
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-            <PrimaryButton style="mt-5" type="submit" label="Submit" />
-          </form>
         </section>
         <Footer />
       </div>
