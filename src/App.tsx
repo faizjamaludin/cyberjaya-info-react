@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import UserRoute from "./routes/UserRoute";
 import AdminRoute from "./routes/AdminRoute";
+import TableMenu from "./components/TableMenu";
 
 // Dashboard
 import Dashboard from "./pages/dashboard/Dashboard";
@@ -47,6 +48,7 @@ function App() {
         <Route path="/dashboard/news" element={<News />} />
         <Route path="/dashboard/news/addnews" element={<AddNews />} />
         <Route path="/dashboard/testing" element={<Testing />} />
+        <Route path="/dashboard/tablemenu" element={<TableMenu />} />
       </Routes>
     </BrowserRouter>
   );

@@ -6,39 +6,14 @@ import { PrimaryButton } from "../../components/Button";
 import Sidenav from "../../components/Sidenav";
 import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
-import DataTable from 'react-data-table-component';
+import DataTable from "react-data-table-component";
+
+import NewsData from "../../components/data/NewsData";
 
 function News() {
   const selectIsOpen = (state: RootState) => state.resize;
   const { isOpen } = useSelector(selectIsOpen);
-  const dispatch = useDispatch<any>();
   const navigate = useNavigate();
-
-  useEffect(() => { }, [dispatch]);
-
-  const columns = [
-    {
-      name: 'Title',
-      selector: (row: any) => row.title,
-    },
-    {
-      name: 'Year',
-      selector: (row: any) => row.year,
-    },
-  ];
-
-  const data = [
-    {
-      id: 1,
-      title: 'Beetlejuice',
-      year: '1988',
-    },
-    {
-      id: 2,
-      title: 'Ghostbusters',
-      year: '1984',
-    },
-  ]
 
   return (
     <div className="w-full flex flex-row">
@@ -51,13 +26,16 @@ function News() {
         <section className="min-h-screen w-11/12 py-5 px-10 text-primary">
           <div className="flex justify-between items-center mt-10">
             <h1 className="font-medium text-2xl">News</h1>
-            <PrimaryButton label="+ Add News" onClick={() => { navigate('/dashboard/news/addnews') }} />
+            <PrimaryButton
+              label="+ Add News"
+              onClick={() => {
+                navigate("/dashboard/news/addnews");
+              }}
+            />
           </div>
-          <DataTable
-            columns={columns}
-            data={data}
-          />
-
+          <div className="mt-10">
+            <NewsData />
+          </div>
         </section>
         <Footer />
       </div>

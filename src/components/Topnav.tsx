@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { PrimaryButton } from "./Button";
-import { topNavMenu, userOption } from "./menu/menuList";
+import { topNavMenu, userOption } from "./list/menuList";
 
 import { useNavigate, useLocation } from "react-router-dom";
 

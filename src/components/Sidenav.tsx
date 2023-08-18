@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { openCloseSideNav } from "../features/resize/resizeSlice";
 import { RootState } from "../features/store";
-import { sideNavMenu } from "./menu/menuList";
+import { sideNavMenu } from "./list/menuList";
 import { isAuth } from "../features/auth/authSlice";
 
 import { PrimaryButton } from "./Button";
