@@ -19,9 +19,9 @@ function ItemEventPage() {
   }, [dispatch, eventTitle, eventDesc, eventLocation, from, to]);
 
   return (
-    <div className="w-full justify-center items-center flex flex-col">
+    <div className="w-full min-h-screen justify-center items-center flex flex-col">
       <Topnav />
-      <div className="container flex justify-center items-center flex-col">
+      <div className="container flex flex-1 items-center flex-col">
         <div className="w-full md:py-10 md:px-0 p-10">
           <div className="border h-64 flex justify-center items-center">
             Item Image

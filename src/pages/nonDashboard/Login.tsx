@@ -38,9 +38,9 @@ function Login() {
   });
 
   return (
-    <div className="w-full">
+    <div className="w-full justify-center items-center min-h-screen flex flex-col">
       <Topnav />
-      <section className="flex justify-center items-center w-full my-40">
+      <section className="flex flex-1 justify-center items-center w-full">
         <form
           onSubmit={formik.handleSubmit}
           className="w-96  border-2 border-primary rounded-md shadow-md p-4"

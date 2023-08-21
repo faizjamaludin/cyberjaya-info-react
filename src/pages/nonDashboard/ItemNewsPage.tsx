@@ -19,9 +19,9 @@ function ItemNewsPage() {
   }, [dispatch, newsTitle, newsInfo, newsDate]);
 
   return (
-    <div className="w-full justify-center items-center flex flex-col">
+    <div className="w-full justify-center items-center flex flex-col min-h-screen">
       <Topnav />
-      <div className="container flex justify-center items-center flex-col">
+      <div className="container flex flex-1 justify-center items-center flex-col">
         <div className="w-full md:py-10 md:px-0 p-10">
           <div className="border h-64 flex justify-center items-center">
             Item Image

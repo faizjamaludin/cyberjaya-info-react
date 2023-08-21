@@ -6,9 +6,9 @@ import StarIcon from "@mui/icons-material/Star";
 
 function ListingPage() {
   return (
-    <div className="w-full justify-center items-center flex flex-col">
+    <div className="w-full justify-center items-center min-h-screen flex flex-col">
       <Topnav />
-      <div className="container flex justify-center items-center flex-col">
+      <div className="container flex flex-1 items-center flex-col">
         <div className="w-full md:py-10 md:px-0 p-10">
           <h1 className="font-semibold text-2xl text-primary">Homemade</h1>
           <div className="grid grid-cols-7 gap-10 mt-10">
