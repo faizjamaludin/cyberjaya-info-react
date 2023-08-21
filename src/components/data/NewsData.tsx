@@ -99,12 +99,15 @@ function NewsData() {
     setIsModalOpen(false);
   };
 
-  const filterItems = (data: any, filterText: string) =>
-    data.filter(
-      (item: any) =>
-        item.newsTitle &&
-        item.newsTitle.toLowerCase().includes(filterText.toLowerCase())
-    );
+  const filterItems = (data: any, filterText: string) => {
+    if (data) {
+      return data.filter(
+        (item: any) =>
+          item.newsTitle &&
+          item.newsTitle.toLowerCase().includes(filterText.toLowerCase())
+      );
+    }
+  };
 
   const filteredItems = filterItems(newsItem, filterText);
 

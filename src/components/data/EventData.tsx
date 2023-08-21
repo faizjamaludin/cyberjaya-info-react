@@ -88,12 +88,15 @@ function EventData() {
     );
   }, [filterText, resetPaginationToggle]);
 
-  const filterItems = (data: any, filterText: string) =>
-    data.filter(
-      (item: any) =>
-        item.eventTitle &&
-        item.eventTitle.toLowerCase().includes(filterText.toLowerCase())
-    );
+  const filterItems = (data: any, filterText: string) => {
+    if (data) {
+      return data.filter(
+        (item: any) =>
+          item.eventTitle &&
+          item.eventTitle.toLowerCase().includes(filterText.toLowerCase())
+      );
+    }
+  };
 
   const filteredItems = filterItems(eventItem, filterText);
 

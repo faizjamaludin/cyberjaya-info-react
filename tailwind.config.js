@@ -14,6 +14,10 @@ module.exports = {
         200: "#9ca3af",
         300: "#e5e7eb",
       },
+      success: {
+        500: "#22c55e",
+        600: "#16a34a",
+      },
     },
     extend: {},
   },

@@ -2,11 +2,15 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3001/news/";
 
-const addNews = async (newsData: any) => {
+const addNews = async (newsData: FormData) => {
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
 
-  const response = await axios.post(API_URL, newsData);
+  const response = await axios.post(API_URL, newsData, config);
 
-  console.log(response.data);
   return response.data;
 };
 

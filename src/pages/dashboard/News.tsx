@@ -23,7 +23,7 @@ function News() {
       <div
         className={`w-full duration-300 ${isOpen === true ? "ml-20" : "ml-60"}`}
       >
-        <section className="min-h-screen w-11/12 py-5 px-10 text-primary">
+        <section className="min-h-screen container py-5 px-10 text-primary">
           <div className="flex justify-between items-center mt-10">
             <h1 className="font-medium text-2xl">News</h1>
             <PrimaryButton

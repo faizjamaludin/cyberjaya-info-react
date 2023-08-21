@@ -7,6 +7,7 @@ interface NewsType {
   _id?: string;
   newsTitle?: string;
   newsInfo?: string;
+  message?: string;
   date?: Date;
 }
 
@@ -14,6 +15,7 @@ export interface NewsState {
   newsItem: NewsType[] | null;
   newsTitle?: string;
   newsInfo?: string;
+  message?: string | null;
   date?: Date | null;
 }
 
@@ -22,14 +24,13 @@ const initialState: NewsState = {
   newsTitle: "",
   newsInfo: "",
   date: null,
+  message: "",
 };
 
 export const addNews = createAsyncThunk(
   "news/add",
-  async (newsData: any, thunkAPI) => {
+  async (newsData: FormData, thunkAPI) => {
     try {
-      console.log(Object.entries(newsData))
-
       return await newsService.addNews(newsData);
     } catch (error: any) {
       const message =
@@ -83,6 +84,9 @@ export const newsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(addNews.fulfilled, (state, action: any) => {
+        state.message = action.payload.message;
+      })
       .addCase(getAllNews.fulfilled, (state, action: any) => {
         state.newsItem = action.payload;
       })
@@ -94,5 +98,5 @@ export const newsSlice = createSlice({
   },
 });
 
-export const { } = newsSlice.actions;
+export const {} = newsSlice.actions;
 export default newsSlice.reducer;

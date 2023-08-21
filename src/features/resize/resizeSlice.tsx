@@ -5,13 +5,11 @@ export interface ResizeState {
   isOpen: boolean;
 }
 
-const open = localStorage.getItem('open')
+const open = localStorage.getItem("open");
 
 const initialState: ResizeState = {
   isOpen: open ? JSON.parse(open) : false,
 };
-
-console.log(Boolean(!open))
 
 export const resizeSlice = createSlice({
   name: "resize",
@@ -19,7 +17,7 @@ export const resizeSlice = createSlice({
   reducers: {
     openCloseSideNav(state) {
       state.isOpen = !state.isOpen;
-      localStorage.setItem('open', JSON.stringify(state.isOpen))
+      localStorage.setItem("open", JSON.stringify(state.isOpen));
     },
   },
 });
