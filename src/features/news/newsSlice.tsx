@@ -28,6 +28,8 @@ export const addNews = createAsyncThunk(
   "news/add",
   async (newsData: any, thunkAPI) => {
     try {
+      console.log(Object.entries(newsData))
+
       return await newsService.addNews(newsData);
     } catch (error: any) {
       const message =
@@ -92,5 +94,5 @@ export const newsSlice = createSlice({
   },
 });
 
-export const {} = newsSlice.actions;
+export const { } = newsSlice.actions;
 export default newsSlice.reducer;

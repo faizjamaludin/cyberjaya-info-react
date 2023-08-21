@@ -3,6 +3,7 @@ import axios from "axios";
 const API_URL = "http://localhost:3001/news/";
 
 const addNews = async (newsData: any) => {
+
   const response = await axios.post(API_URL, newsData);
 
   console.log(response.data);
