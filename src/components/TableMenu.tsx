@@ -16,16 +16,21 @@ function TableMenu() {
 
   const handleClick = (e: any) => {
     setAnchorEl(e.currentTarget);
-    setIsModalOpen(true);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  console.log(isModalOpen);
 
   return (
     <div>
@@ -44,18 +49,16 @@ function TableMenu() {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem className="flex gap-2" onClick={handleClose}>
+        <MenuItem className="flex gap-2" onClick={openModal}>
           <EditIcon fontSize="small" />
           <span className=" text-sm font-medium text-primary">Edit</span>
         </MenuItem>
-        <MenuItem className="flex gap-2" onClick={handleClose}>
+        <MenuItem className="flex gap-2" onClick={closeModal}>
           <DeleteIcon fontSize="small" />
           <span className=" text-sm font-medium text-primary">Delete</span>
         </MenuItem>
       </Menu>
-      {isModalOpen && selectedRow && (
-        <NewsModal open={isModalOpen} onClose={closeModal} />
-      )}
+      {isModalOpen && <NewsModal open={isModalOpen} onClose={closeModal} />}
     </div>
   );
 }

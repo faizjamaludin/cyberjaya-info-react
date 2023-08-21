@@ -6,9 +6,9 @@ import { PrimaryButton } from "../../components/Button";
 import Sidenav from "../../components/Sidenav";
 import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
-import DataTable from "react-data-table-component";
 
 import NewsData from "../../components/data/NewsData";
+import AddIcon from "@mui/icons-material/Add";
 
 function News() {
   const selectIsOpen = (state: RootState) => state.resize;
@@ -27,7 +27,9 @@ function News() {
           <div className="flex justify-between items-center mt-10">
             <h1 className="font-medium text-2xl">News</h1>
             <PrimaryButton
-              label="+ Add News"
+              label=" Add News"
+              icon={<AddIcon />}
+              style="flex items-center"
               onClick={() => {
                 navigate("/dashboard/news/addnews");
               }}

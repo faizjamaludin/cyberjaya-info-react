@@ -23,7 +23,7 @@ export const sideNavMenu = [
   },
   {
     title: "Events",
-    path: "/dashboard/events",
+    path: "/dashboard/event",
     icon: <EventNoteIcon fontSize="small" />,
   },
   {

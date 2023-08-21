@@ -56,7 +56,7 @@ const FilterComponent = ({ filterText, onFilter }: any) => (
   </>
 );
 
-function NewsData() {
+function ListingData() {
   const [loading, setLoading] = useState(true);
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
@@ -125,4 +125,4 @@ function NewsData() {
   );
 }
 
-export default NewsData;
+export default ListingData;

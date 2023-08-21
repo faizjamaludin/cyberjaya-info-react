@@ -5,7 +5,7 @@ import { RootState } from "../../features/store";
 import dateFormat from "dateformat";
 import DataTable from "react-data-table-component";
 
-import { getAllNews } from "../../features/news/newsSlice";
+import { getAllEvent } from "../../features/event/eventSlice";
 
 const columns = [
   {
@@ -15,12 +15,12 @@ const columns = [
   },
   {
     name: "Title",
-    selector: (row: any) => row.newsTitle,
-    width: "35rem",
+    selector: (row: any) => row.eventTitle,
+    width: "20rem",
   },
   {
     name: "Content",
-    selector: (row: any) => row.newsInfo,
+    selector: (row: any) => row.eventDesc,
     width: "35rem",
   },
   {
@@ -56,20 +56,18 @@ const FilterComponent = ({ filterText, onFilter }: any) => (
   </>
 );
 
-function NewsData() {
+function EventData() {
   const [loading, setLoading] = useState(true);
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
-  const [selectedRow, setSelectedRow] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const dispatch = useDispatch<any>();
 
-  const selectNews = (state: RootState) => state.news;
-  const { newsItem } = useSelector(selectNews);
+  const selectEvent = (state: RootState) => state.event;
+  const { eventItem } = useSelector(selectEvent);
 
   useEffect(() => {
-    dispatch(getAllNews());
+    dispatch(getAllEvent());
     setLoading(false);
   }, [dispatch, filterText]);
 
@@ -90,23 +88,14 @@ function NewsData() {
     );
   }, [filterText, resetPaginationToggle]);
 
-  const handleRowClick = (row: any) => {
-    setSelectedRow(row);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
   const filterItems = (data: any, filterText: string) =>
     data.filter(
       (item: any) =>
-        item.newsTitle &&
-        item.newsTitle.toLowerCase().includes(filterText.toLowerCase())
+        item.eventTitle &&
+        item.eventTitle.toLowerCase().includes(filterText.toLowerCase())
     );
 
-  const filteredItems = filterItems(newsItem, filterText);
+  const filteredItems = filterItems(eventItem, filterText);
 
   return (
     <DataTable
@@ -115,7 +104,7 @@ function NewsData() {
       customStyles={customStyle}
       progressPending={loading}
       pagination
-      paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
+      paginationResetDefaultPage={resetPaginationToggle}
       subHeader
       subHeaderComponent={subHeaderComponentMemo}
       persistTableHead
@@ -125,4 +114,4 @@ function NewsData() {
   );
 }
 
-export default NewsData;
+export default EventData;

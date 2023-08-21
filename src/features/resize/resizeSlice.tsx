@@ -6,7 +6,7 @@ export interface ResizeState {
 }
 
 const initialState: ResizeState = {
-  isOpen: true,
+  isOpen: false,
 };
 
 export const resizeSlice = createSlice({
